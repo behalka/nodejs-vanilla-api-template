@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const request = require('supertest')
-const app = require('../src/api/app')
+const app = require('../../src/api/app')
 
 describe('test the tests!', () => {
   it('should pass', () => {

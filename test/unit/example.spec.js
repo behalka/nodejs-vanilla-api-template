@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const { makeFindUser } = require('../src/operations/find-user')
+const { makeFindUser } = require('../../src/operations/find-user')
 
 const fakeUsers = [
   {
