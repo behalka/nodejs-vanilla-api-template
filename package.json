@@ -1,0 +1,27 @@
+{
+  "name": "template-clean-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "behalka <kaja.behalova@strv.com>",
+  "license": "ISC",
+  "engines": {
+    "node": "^13.2.1",
+    "npm": "^6.4.1"
+  },
+  "type": "commonJS",
+  "devDependencies": {
+    "@strv/eslint-config-mocha": "^2.1.1",
+    "@strv/eslint-config-node": "^2.1.2",
+    "@strv/prettier-config": "^1.0.3",
+    "eslint": "^6.7.2"
+  },
+  "dependencies": {
+    "knex": "^0.20.4",
+    "objection": "^2.0.5",
+    "pg": "^7.14.0"
+  }
+}
