@@ -18,5 +18,6 @@ describe('test the tests!', () => {
       .get('/data')
       .expect(200)
     expect(res.body).to.be.an('array')
+    expect(res.body).to.have.lengthOf.greaterThan(0)
   })
 })
