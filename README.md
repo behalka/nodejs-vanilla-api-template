@@ -15,3 +15,4 @@
 - fancy tags search to test ORM capabilities
 - Nexus/Objection.js implementation
 - generic pagination
+- efficient DB/Repository mocks -> paralel tests
