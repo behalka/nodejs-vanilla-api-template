@@ -1,8 +1,10 @@
+const log = require('../utils/logger')
+
 const baseOperation = ({ name }) => operationCallback => async input => {
   const start = Date.now()
-  console.log(`Operation ${name} has started!`)
+  log.info({ service: name }, 'started!')
   const result = await operationCallback(input)
-  console.log(`Operation ${name} has ended! (time: ${Date.now() - start}ms)`)
+  log.info({ service: name, timeElapsed: Date.now() - start }, 'ended!')
   return result
 }
 

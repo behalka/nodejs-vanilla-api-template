@@ -1,9 +1,11 @@
+const log = require('../utils/logger')
+
 const stop = getServerHandler => async () => {
   const server = getServerHandler()
   if (server && server.listening) {
     await new Promise(done => server.close(done))
   }
-  console.log('server closed')
+  log.info('Server: closed')
 }
 
 const start = (koaApp, setServerHandler) => async () => {
@@ -12,7 +14,7 @@ const start = (koaApp, setServerHandler) => async () => {
     const server = koaApp.listen(3000, done)
     setServerHandler(server)
   })
-  console.log('server has started')
+  log.info('Server: started')
 }
 
 module.exports = {

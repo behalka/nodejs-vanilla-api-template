@@ -20,6 +20,7 @@
     "chai": "^4.2.0",
     "eslint": "^6.7.2",
     "mocha": "^6.2.2",
+    "pino-pretty": "^3.5.0",
     "supertest": "^4.0.2"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "koa-router": "^7.4.0",
     "objection": "^2.0.5",
     "pg": "^7.14.0",
+    "pino": "^5.14.0",
     "ramda": "^0.26.1"
   }
 }
