@@ -5,6 +5,6 @@ const config = require('@strv/prettier-config')
 module.exports = {
   ...config,
   // custom rules
-  printWidth: 110,
+  printWidth: 99,
   trailingComma: 'all',
 }

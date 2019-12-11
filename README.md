@@ -32,7 +32,8 @@
 
 - Typescript interfaces -> JUST like contracts between layers
 
-  - try to include a reasonable amount of TS, stick with JS files
+  - try to include a reasonable amount of TS, stick with JS files maybe
+  - without TS, there will be basically no intellisense in business logic files
 
 - Prepare some basic methods for a repo and build them for every model-based repo
   - e.g basic "update" method

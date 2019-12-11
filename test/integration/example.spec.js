@@ -13,11 +13,19 @@ describe('test the tests!', () => {
       .expect(200)
   })
 
-  it('should fetch some data', async () => {
+  it('should fetch some data via decorated Operation', async () => {
     const res = await request(app.getServer())
       .get('/data')
       .expect(200)
     expect(res.body).to.be.an('array')
     expect(res.body).to.have.lengthOf.greaterThan(0)
+  })
+
+  it('should fetch admins via decorated Operation', async () => {
+    const res = await request(app.getServer())
+      .get('/admin')
+      .expect(200)
+    expect(res.body).to.be.an('array')
+    expect(res.body).to.have.lengthOf(1)
   })
 })
