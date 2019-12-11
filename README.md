@@ -16,3 +16,25 @@
 - Nexus/Objection.js implementation
 - generic pagination
 - efficient DB/Repository mocks -> paralel tests
+
+## More tests for the codebase
+
+- Admin/User operation setup
+- Validation (probably in operations)
+-
+
+## Feedback from Michal
+
+- Injection example -> different impl. of findUser for admin and user operation
+  - shared operation code
+  - findUser repo call will implement some implicit restrictions
+- Inject different validation schemas
+
+- Typescript interfaces -> JUST like contracts between layers
+
+  - try to include a reasonable amount of TS, stick with JS files
+
+- Prepare some basic methods for a repo and build them for every model-based repo
+  - e.g basic "update" method
+  - copy those methods to each "built" repo
+  - that would require DI
