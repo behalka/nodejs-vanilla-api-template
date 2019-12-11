@@ -15,15 +15,15 @@ const fakeRepo = {
   getAll: () => fakeUsers,
 }
 
-describe('find-user.js', () => {
+describe('find-user operation', () => {
   it('returns the data when isAdmin = true', async () => {
-    const findUser = makeFindUser({ repo: fakeRepo })
+    const findUser = makeFindUser({ findAll: fakeRepo.getAll })
     const res = await findUser({ isAdmin: true })
     expect(res).to.have.lengthOf(fakeUsers.length)
   })
 
   it('returns empty array when isAdmin = false', async () => {
-    const findUser = makeFindUser({ repo: fakeRepo })
+    const findUser = makeFindUser({ findAll: fakeRepo.getAll })
     const res = await findUser({ isAdmin: false })
     expect(res).to.have.lengthOf(0)
   })

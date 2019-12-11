@@ -1,4 +1,4 @@
-const { User } = require('../models')
+// const { User } = require('../models')
 
 /**
  * we can again
@@ -16,14 +16,16 @@ const { User } = require('../models')
  * @typedef {import('objection').Model} Model
  */
 
-/**
- * Test JSLint options
- * @returns {User} array of Users
- */
-const getAll = () => {
+const findAllAdmins = User => () => {
+  return User.query().where('role', 'admin')
+}
+
+const findAll = User => () => {
+  console.log('I am a findAll() overwrite')
   return User.query()
 }
 
 module.exports = {
-  getAll,
+  findAllAdmins,
+  findAll,
 }

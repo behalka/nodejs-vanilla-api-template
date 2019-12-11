@@ -1,11 +1,11 @@
-// the repo is injected so it can be mocked
-const makeFindUser = ({ repo }) => (options = {}) => {
+// the repo function is injected so it can be mocked
+const makeFindUser = ({ findAll }) => (options = {}) => {
   if (!options.isAdmin) {
     console.log('no data for you')
     return []
   }
 
-  return repo.getAll()
+  return findAll()
 }
 
 module.exports = {

@@ -1,7 +1,7 @@
-const userRepo = require('../data-access/repos/user-repo')
+const { userRepo } = require('../data-access/repos/index')
 const { makeFindUser } = require('./find-user')
 
-const findUser = makeFindUser({ repo: userRepo })
+const findUser = makeFindUser({ findAll: userRepo.findAll })
 
 module.exports = {
   findUser,
