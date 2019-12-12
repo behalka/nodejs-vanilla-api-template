@@ -33,8 +33,14 @@ run:
 # migrate-test: install
 # 	ts-node $(bin)typeorm --connection test migration:run
 
-# migrate-down: install
-# 	ts-node $(bin)typeorm migration:revert
+migrate: install
+	$(bin)knex migrate:latest --debug
+
+migrate-down: install
+	$(bin)knex migrate:rollback
+
+seed: install
+	$(bin)knex seed:run
 
 clean:
 	rm -rf ./.nyc_output

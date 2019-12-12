@@ -11,7 +11,7 @@ const knex = Knex({
     host: 'localhost',
     user: 'postgres',
     password: 'postgres',
-    database: 'template-db',
+    database: 'vanilla-template-db',
   },
   ...knexSnakeCaseMappers(),
 })
