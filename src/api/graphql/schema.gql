@@ -2,10 +2,18 @@
 ### Do not make changes to this file directly
 
 
+input CreateInputType {
+  name: String
+}
+
 type Event implements Node {
   id: ID!
   name: String!
   owner: User!
+}
+
+type Mutation {
+  createEvent(input: CreateInputType!): Event!
 }
 
 interface Node {

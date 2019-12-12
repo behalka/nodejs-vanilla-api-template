@@ -1,6 +1,14 @@
 /* eslint-disable id-length */
 const path = require('path')
-const { objectType, makeSchema, interfaceType, queryType } = require('nexus')
+const {
+  objectType,
+  makeSchema,
+  interfaceType,
+  inputObjectType,
+  mutationType,
+  arg,
+  queryType,
+} = require('nexus')
 
 /**
  * GraphQL schema definition
@@ -15,6 +23,14 @@ const Node = interfaceType({
     t.resolveType(() => null)
   },
 })
+// Inputs
+const CreateEventInput = inputObjectType({
+  name: 'CreateInputType',
+  definition(t) {
+    t.string('name')
+  },
+})
+
 // objects
 const User = objectType({
   name: 'User',
@@ -57,9 +73,24 @@ const Query = queryType({
     })
   },
 })
-
+// Mutation
+const Mutation = mutationType({
+  definition(t) {
+    t.field('createEvent', {
+      type: Event,
+      args: {
+        input: arg({ type: CreateEventInput, required: true }),
+      },
+      resolve: (root, args) => {
+        console.log(args.input.name)
+        // todo:
+        return null
+      },
+    })
+  },
+})
 const schema = makeSchema({
-  types: [Query, User, Event, Node],
+  types: [Query, Mutation, User, Event, Node, CreateEventInput],
   outputs: {
     schema: path.join(__dirname, 'schema.gql'),
   },
