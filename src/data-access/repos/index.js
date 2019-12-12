@@ -9,7 +9,8 @@ const composeRepo = model => R.compose(compileRepo(model), R.merge)
 
 // compiled
 const userRepo = composeRepo(User)(buildBaseRepo, buildUserRepo)
-const eventRepo = composeRepo(Event)(buildBaseRepo)
+// fixme: low priority..
+const eventRepo = composeRepo(Event)(buildBaseRepo, {})
 
 module.exports = {
   userRepo,

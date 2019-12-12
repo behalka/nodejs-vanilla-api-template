@@ -9,11 +9,13 @@ const {
   arg,
   queryType,
 } = require('nexus')
+const { createEvent } = require('../../operations/event/index')
 
 /**
  * GraphQL schema definition
  * Can (should) be easily spread into multiple files
  * the Koa "router" equivalent
+ * should be split into "resolver" files similar as with type-graphql
  */
 
 const Node = interfaceType({
@@ -81,10 +83,11 @@ const Mutation = mutationType({
       args: {
         input: arg({ type: CreateEventInput, required: true }),
       },
-      resolve: (root, args) => {
+      resolve: async (root, args) => {
         console.log(args.input.name)
         // todo:
-        return null
+        const event = await createEvent(args.input)
+        return event
       },
     })
   },
