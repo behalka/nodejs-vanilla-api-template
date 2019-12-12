@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const { makeFindUser } = require('../../src/operations/find-user')
+const { makeFindUser } = require('../../src/operations/user/find-user')
 
 const fakeUsers = [
   {
@@ -13,13 +13,14 @@ const fakeUsers = [
 ]
 const fakeRepo = {
   getAll: () => fakeUsers,
+  findOne: () => fakeUsers[0],
 }
 
 describe('find-user operation', () => {
   it('returns the data', async () => {
-    const findUser = makeFindUser({ findAll: fakeRepo.getAll })
+    const findUser = makeFindUser({ findById: fakeRepo.findOne })
     const res = await findUser()
-    expect(res).to.have.lengthOf(fakeUsers.length)
+    expect(res).to.have.property('id', 1)
   })
 
   // todo: findUser op should have some business logic in it

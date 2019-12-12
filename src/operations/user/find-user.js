@@ -1,6 +1,6 @@
 // the repo function is injected so it can be mocked
-const makeFindUser = ({ findAll }) => async () => {
-  const users = await findAll()
+const makeFindUser = ({ findById }) => async id => {
+  const users = await findById(id)
   return users
 }
 

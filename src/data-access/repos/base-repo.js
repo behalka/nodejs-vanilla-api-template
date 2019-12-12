@@ -1,15 +1,14 @@
-const update = model => (inputs, whereCondition) => {
-  return model
+const findById = model => id => model.query().findById(id)
+const findAll = model => () => model.query()
+
+const update = model => (inputs, whereCondition) =>
+  model
     .query()
     .patch(inputs)
     .where(whereCondition)
-}
-
-const findAll = model => () => {
-  return model.query()
-}
 
 module.exports = {
   update,
   findAll,
+  findById,
 }

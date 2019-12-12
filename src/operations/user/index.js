@@ -1,7 +1,8 @@
 const { compose } = require('ramda')
-const { userRepo } = require('../data-access/repos/index')
+const base = require('../base')
+const { userRepo } = require('../../data-access/repos/index')
 const { makeFindUser } = require('./find-user')
-const base = require('./base')
+const { makeListUsers } = require('./list-users')
 
 // findUser is a compiled operation that can be used from API, worker, CLI...
 const findUser = compose(
@@ -9,8 +10,14 @@ const findUser = compose(
   base({ name: 'myFancyFnName' }),
   // operation "make"
   makeFindUser,
+)({ findById: userRepo.findById })
+
+const listUsers = compose(
+  base({ name: 'findUsers' }),
+  makeListUsers,
 )({ findAll: userRepo.findAll })
 
+// not sure this is the best thing to do ...
 const findAdmin = compose(
   base({ name: 'myFancyFnName2' }),
   makeFindUser,
@@ -19,4 +26,5 @@ const findAdmin = compose(
 module.exports = {
   findUser,
   findAdmin,
+  listUsers,
 }

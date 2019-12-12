@@ -1,12 +1,9 @@
-// const { User } = require('../models')
-
 /**
  * we can again
  * 1) pass the DB Model here
  * 2) require more "outer" DB Model here and mock the repo calls from operations
  *
- * When 2) we cannot mock the model. That would be a pain though because we'd have
- * to mock the whole Objection.js API
+ * 1) is implemented at the moment
  */
 
 /**
@@ -20,9 +17,15 @@ const findAllAdmins = User => () => {
   return User.query().where('role', 'admin')
 }
 
-const findAll = User => () => {
-  console.log('I am a findAll() overwrite')
-  return User.query()
+// findAll override from base repo
+const findAll = User => (filter = {}) => {
+  // filter defaults
+  const { usersOnly = true } = filter
+  const query = User.query()
+  if (usersOnly) {
+    query.where('role', 'user')
+  }
+  return query
 }
 
 module.exports = {
