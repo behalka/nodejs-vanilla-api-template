@@ -1,10 +1,21 @@
 const Koa = require('koa')
+const { ApolloServer } = require('apollo-server-koa')
 const { router } = require('./routes')
+const { schema } = require('./graphql/schema')
+
+// GraphQL server plug-in
+const graphQlServer = new ApolloServer({
+  schema,
+  introspection: true,
+  engine: false,
+})
 
 // the context needed for start/stop functions
 const koa = new Koa()
 koa.use(router.routes()).use(router.allowedMethods())
-// server is a "private" variable here
+// plug-in apollo server
+graphQlServer.applyMiddleware({ app: koa })
+// http server is a "private" variable here
 let server
 
 const app = {
