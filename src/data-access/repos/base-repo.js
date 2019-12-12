@@ -7,7 +7,10 @@ const update = model => (inputs, whereCondition) =>
     .patch(inputs)
     .where(whereCondition)
 
+const create = model => input => model.query().insert(input)
+
 module.exports = {
+  create,
   update,
   findAll,
   findById,
