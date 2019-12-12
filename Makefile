@@ -24,8 +24,8 @@ test: install
 run:
 	node ./src/index.js
 
-# watch: install
-# 	nodemon --watch src --ext ts,js,gql --exec make run-ts-node
+watch: install
+	$(bin)nodemon --watch src --ext js,gql --exec make run
 
 # coverage: install
 # 	NODE_ENV=test nyc mocha $(testFlags) "./test/**/*.spec.js"
