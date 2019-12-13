@@ -1,5 +1,6 @@
 const { compose } = require('ramda')
 const base = require('../base')
+const { inputIdSchema } = require('../../entities/shared')
 const { userRepo } = require('../../data-access/repos/index')
 const { makeFindUser } = require('./find-user')
 const { makeListUsers } = require('./list-users')
@@ -7,7 +8,7 @@ const { makeListUsers } = require('./list-users')
 // findUser is a compiled operation that can be used from API, worker, CLI...
 const findUser = compose(
   // operation static metadata, e.g validation schema, execution context..
-  base({ name: 'myFancyFnName' }),
+  base({ name: 'myFancyFnName', schema: inputIdSchema }),
   // operation "make"
   makeFindUser,
 )({ findById: userRepo.findById })

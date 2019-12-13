@@ -16,7 +16,7 @@ router.get('/allUsers', async ctx => {
 })
 router.get('/user', async ctx => {
   // fixed id = 1
-  ctx.body = await findUser(1)
+  ctx.body = await findUser({ id: 1 })
 })
 // router.get('/admin', async ctx => {
 //   const users = await findAdmin({ isAdmin: true })

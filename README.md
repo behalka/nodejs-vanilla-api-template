@@ -9,16 +9,14 @@
   - without decorators
   - with the most transparent ORM I know of - Objection.js
 
-## TODO - functionality
+## TODO - functionality/tests
 
 - simple 3-entities example (User, Event, Tag)
 - fancy tags search to test ORM capabilities
 - Nexus/Objection.js implementation
 - generic pagination
 - efficient DB/Repository mocks -> paralel tests
-
-## More tests for the codebase
-
+- Dataloader
 - Admin/User operation setup
 - Validation (probably in operations)
 - Authorization/user roles

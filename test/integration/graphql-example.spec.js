@@ -1,5 +1,4 @@
 const { expect } = require('chai')
-const { gql } = require('apollo-server-koa')
 const request = require('supertest')
 const app = require('../../src/api/app')
 
@@ -7,7 +6,6 @@ const query = `
   query FindEvent($id: Int!) {
     event(id: $id) {
       id
-      name
     }
   }
 `
