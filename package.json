@@ -25,6 +25,7 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
+    "ajv": "^6.10.2",
     "apollo-server-koa": "^2.9.13",
     "graphql": "^14.5.8",
     "knex": "^0.20.4",
