@@ -21,7 +21,7 @@ interface Node {
 }
 
 type Query {
-  event: Event!
+  event(id: Int): Event!
   users: [User!]!
 }
 

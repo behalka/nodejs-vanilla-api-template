@@ -1,21 +1,15 @@
 /* eslint-disable id-length */
 const path = require('path')
-const {
-  objectType,
-  makeSchema,
-  interfaceType,
-  inputObjectType,
-  mutationType,
-  arg,
-  queryType,
-} = require('nexus')
-const { createEvent } = require('../../operations/event/index')
+const { makeSchema, interfaceType } = require('nexus')
+const userSchema = require('./user-schema')
+const eventSchema = require('./event-schema')
 
 /**
  * GraphQL schema definition
  * Can (should) be easily spread into multiple files
  * the Koa "router" equivalent
  * should be split into "resolver" files similar as with type-graphql
+ * THIS FILE should include interfaces and enums
  */
 
 const Node = interfaceType({
@@ -25,75 +19,9 @@ const Node = interfaceType({
     t.resolveType(() => null)
   },
 })
-// Inputs
-const CreateEventInput = inputObjectType({
-  name: 'CreateInputType',
-  definition(t) {
-    t.string('name')
-  },
-})
 
-// objects
-const User = objectType({
-  name: 'User',
-  definition(t) {
-    t.implements(Node)
-    t.string('email')
-    t.string('firstName', { nullable: true })
-    t.string('lastName', {
-      nullable: true,
-      // scalar transformation example
-      resolve: obj => `${obj.lastName}-foo`,
-    })
-  },
-})
-const Event = objectType({
-  name: 'Event',
-  definition(t) {
-    t.implements(Node)
-    t.string('name')
-    t.field('owner', {
-      type: 'User',
-      resolve: (root, args, context) => {
-        // (object) field resolver example
-        return { id: 1, email: 'mock@email.com' }
-      },
-    })
-  },
-})
-// Query
-const Query = queryType({
-  definition(t) {
-    t.list.field('users', {
-      type: User,
-      // at least we dont have to build parallel resolvers structure?
-      resolve: () => [],
-    })
-    t.field('event', {
-      type: Event,
-      resolve: () => ({ id: 1, name: 'myMockEvent' }),
-    })
-  },
-})
-// Mutation
-const Mutation = mutationType({
-  definition(t) {
-    t.field('createEvent', {
-      type: Event,
-      args: {
-        input: arg({ type: CreateEventInput, required: true }),
-      },
-      resolve: async (root, args) => {
-        console.log(args.input.name)
-        // todo:
-        const event = await createEvent(args.input)
-        return event
-      },
-    })
-  },
-})
 const schema = makeSchema({
-  types: [Query, Mutation, User, Event, Node, CreateEventInput],
+  types: [Node, ...Object.values(userSchema), ...Object.values(eventSchema)],
   outputs: {
     schema: path.join(__dirname, 'schema.gql'),
   },
