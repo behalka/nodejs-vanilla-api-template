@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
 const { objectType, extendType, arg, intArg, inputObjectType } = require('nexus')
-const { createEvent } = require('../../operations/event/index')
+const { createEvent, findEvent } = require('../../operations/event/index')
 
 const Event = objectType({
   name: 'Event',
@@ -30,7 +30,7 @@ const eventQueries = extendType({
     t.field('event', {
       type: Event,
       args: { id: intArg() },
-      resolve: () => ({ id: 1, name: 'myMockEvent' }),
+      resolve: (root, args) => findEvent(args),
     })
   },
 })
