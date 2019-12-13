@@ -1,6 +1,7 @@
 /* eslint-disable id-length */
 // try to split schema defs into more files
 const { objectType, queryField } = require('nexus')
+const { listUsers } = require('../../operations/user')
 
 const User = objectType({
   name: 'User',
@@ -19,7 +20,7 @@ const User = objectType({
 const userQueries = queryField('users', {
   type: 'User',
   list: true,
-  resolve: () => [],
+  resolve: () => listUsers({ isAdmin: false }),
 })
 
 module.exports = {
