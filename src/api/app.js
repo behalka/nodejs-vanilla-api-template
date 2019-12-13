@@ -1,7 +1,7 @@
 const Koa = require('koa')
 const { ApolloServer } = require('apollo-server-koa')
 const { router } = require('./routes')
-const { schema } = require('./graphql/schema')
+const { schema } = require('./graphql')
 
 // GraphQL server plug-in
 const graphQlServer = new ApolloServer({
