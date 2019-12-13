@@ -15,7 +15,9 @@ const eventSchema = require('./event-schema')
 const Node = interfaceType({
   name: 'Node',
   definition(t) {
-    t.id('id')
+    // todo: or this? it's a string ?
+    // t.id()
+    t.field('id', { type: 'Int' })
     t.resolveType(() => null)
   },
 })

@@ -7,7 +7,7 @@ input CreateInputType {
 }
 
 type Event implements Node {
-  id: ID!
+  id: Int!
   name: String!
   owner: User!
 }
@@ -17,7 +17,7 @@ type Mutation {
 }
 
 interface Node {
-  id: ID!
+  id: Int!
 }
 
 type Query {
@@ -28,6 +28,6 @@ type Query {
 type User implements Node {
   email: String!
   firstName: String
-  id: ID!
+  id: Int!
   lastName: String
 }
