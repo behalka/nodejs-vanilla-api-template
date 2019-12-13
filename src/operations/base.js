@@ -1,9 +1,7 @@
-const Ajv = require('ajv')
 const log = require('../utils/logger')
+const ajv = require('../utils/validator')
 
 const baseOperation = ({ name, schema }) => {
-  // fixme: ajv instance should be shared between services?
-  const ajv = new Ajv()
   // the function signature is correct
   const validationFunc = schema ? ajv.compile(schema) : () => true
 
