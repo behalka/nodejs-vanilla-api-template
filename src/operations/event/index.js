@@ -5,6 +5,7 @@ const { inputIdSchema } = require('../../entities/shared')
 const { eventRepo } = require('../../data-access/repos/index')
 const { makeCreateEvent } = require('./create')
 const { makeFindEvent } = require('./find')
+const { makeListEvents } = require('./list')
 
 // findUser is a compiled operation that can be used from API, worker, CLI...
 const createEvent = compose(
@@ -19,7 +20,13 @@ const findEvent = compose(
   makeFindEvent,
 )({ findById: eventRepo.findById })
 
+const listEvents = compose(
+  base({ name: 'ListEvents' }),
+  makeListEvents,
+)({ findAll: eventRepo.findAll })
+
 module.exports = {
   createEvent,
   findEvent,
+  listEvents,
 }

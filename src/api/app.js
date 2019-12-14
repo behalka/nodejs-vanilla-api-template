@@ -2,12 +2,16 @@ const Koa = require('koa')
 const { ApolloServer } = require('apollo-server-koa')
 const { router } = require('./routes')
 const { schema } = require('./graphql')
+const { initLoaders } = require('./loaders')
 
 // GraphQL server plug-in
 const graphQlServer = new ApolloServer({
   schema,
   introspection: true,
   engine: false,
+  context: () => ({
+    loaders: initLoaders(),
+  }),
 })
 
 // the context needed for start/stop functions

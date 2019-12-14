@@ -1,5 +1,6 @@
 const findById = model => id => model.query().findById(id)
-const findAll = model => () => model.query()
+const findAll = model => () => model.query().orderBy('id', 'desc')
+const findAllByIds = model => (ids = []) => model.query().findByIds(ids)
 
 const update = model => (inputs, whereCondition) =>
   model
@@ -14,4 +15,5 @@ module.exports = {
   update,
   findAll,
   findById,
+  findAllByIds,
 }

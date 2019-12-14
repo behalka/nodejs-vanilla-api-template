@@ -1,5 +1,4 @@
 /* eslint-disable id-length */
-// try to split schema defs into more files
 const { objectType, queryField } = require('nexus')
 const { listUsers } = require('../../operations/user')
 

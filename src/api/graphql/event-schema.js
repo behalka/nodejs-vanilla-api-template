@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
 const { objectType, extendType, arg, intArg, inputObjectType } = require('nexus')
-const { createEvent, findEvent } = require('../../operations/event/index')
+const { createEvent, findEvent, listEvents } = require('../../operations/event/index')
 
 const Event = objectType({
   name: 'Event',
@@ -9,9 +9,14 @@ const Event = objectType({
     t.string('name')
     t.field('owner', {
       type: 'User',
-      resolve: (root, args, context) => {
-        // (object) field resolver example
-        return { id: 1, email: 'mock@email.com' }
+      nullable: true,
+      resolve: async (root, args, context) => {
+        // this always has to be there if field can be null
+        // dataloader does not accept "null" keys
+        if (!root.ownerId) {
+          return Promise.resolve(null)
+        }
+        return context.loaders.user.eventOwnersLoader.load(root.ownerId)
       },
     })
   },
@@ -32,6 +37,10 @@ const eventQueries = extendType({
       args: { id: intArg() },
       resolve: (root, args) => findEvent(args),
     })
+    t.list.field('events', {
+      type: Event,
+      resolve: () => listEvents(),
+    })
   },
 })
 
@@ -44,7 +53,6 @@ const eventMutations = extendType({
         input: arg({ type: CreateEventInput, required: true }),
       },
       resolve: async (root, args) => {
-        console.log(args.input.name)
         const event = await createEvent(args.input)
         return event
       },
