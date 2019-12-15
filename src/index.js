@@ -7,9 +7,13 @@ const removeProcessListeners = () => {
   process.removeAllListeners('SIGTERM')
 }
 
-const handleFatalErrors = () => {
+const handleFatalErrors = err => {
   removeProcessListeners()
-  console.log('Something really bad happened. Exiting the process')
+  log.fatal({ err }, 'Something really bad happened. Exiting the process')
+
+  setTimeout(() => {
+    throw err
+  }, 5000).unref()
 }
 
 const stopServices = async () => {
@@ -31,7 +35,4 @@ const startServices = async () => {
 
 Promise.resolve()
   .then(() => startServices())
-  .catch(err => {
-    console.log(err, 'not this time')
-    throw err
-  })
+  .catch(err => handleFatalErrors(err))

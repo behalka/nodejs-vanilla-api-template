@@ -21,7 +21,7 @@ const findAllAdmins = User => () => {
 const findAll = User => (filter = {}) => {
   // filter defaults
   const { usersOnly = true } = filter
-  const query = User.query()
+  const query = User.query().orderBy('id', 'desc')
   if (usersOnly) {
     query.where('role', 'user')
   }
