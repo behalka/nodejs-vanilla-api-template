@@ -18,11 +18,17 @@ install: node_modules
 lint: install
 	eslint --report-unused-disable-directives --ext .js .
 
+compile: install
+	tsc --pretty --project ./tsconfig.json
+
 test: install
 	NODE_ENV=test LOG_LEVEL=error mocha $(testFlags) "./test/**/*.spec.js"
 
 run:
 	node ./src/index.js
+
+run-compiled: compile
+	node ./dist/index.js
 
 watch: install
 	$(bin)nodemon --watch src --ext js,gql --exec make run
