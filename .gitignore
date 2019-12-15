@@ -99,6 +99,7 @@ jsconfig.json
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 .idea/
 .idea_modules/
+.vscode/
 graphql.config.json
 graphql.schema.json
 
