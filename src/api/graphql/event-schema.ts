@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
-const { objectType, extendType, arg, intArg, inputObjectType } = require('nexus')
-const { createEvent, findEvent, listEvents } = require('../../operations/event/index')
+import { createEvent, listEvents, findEvent } from '../../operations/event/index'
+import { objectType, extendType, arg, intArg, inputObjectType } from 'nexus'
 
 const Event = objectType({
   name: 'Event',
@@ -52,7 +52,10 @@ const eventMutations = extendType({
       args: {
         input: arg({ type: CreateEventInput, required: true }),
       },
-      resolve: async (root, args) => {
+      // args can be "any" we know what's in the operation thanks to type there and validation
+      // resolve: async (root, args) => {
+      resolve: async (root, args: { input: { name: string } }) => {
+        // createEvent input is inferred and checked correctly
         const event = await createEvent(args.input)
         return event
       },
