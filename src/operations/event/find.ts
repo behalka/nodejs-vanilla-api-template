@@ -9,6 +9,8 @@ import { InputId } from '../../entities/shared'
 // the type is internal (id: number vs. InputId type)
 type FindByIdFn = (id: number) => Promise<EventType>
 
+// OR we can try to resolve "imports" via ambient types
+
 export const makeFindEvent = ({ findById }: { findById: FindByIdFn }) => async (
   input: InputId,
 ) => {

@@ -9,7 +9,3 @@ export const inputIdSchema = {
     id: { type: 'number', minimum: 1 },
   },
 }
-
-// module.exports = {
-//   inputIdSchema,
-// }

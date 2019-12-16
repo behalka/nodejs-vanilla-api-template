@@ -1,6 +1,8 @@
 /* eslint-disable id-length */
+import { makeSchema, interfaceType } from 'nexus'
+
 const path = require('path')
-const { makeSchema, interfaceType } = require('nexus')
+// const { makeSchema, interfaceType } = require('nexus')
 const userSchema = require('./user-schema')
 const eventSchema = require('./event-schema')
 

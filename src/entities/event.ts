@@ -16,7 +16,3 @@ export const eventBaseSchema = {
     ownerId: { type: 'number', min: 1 },
   },
 }
-
-// module.exports = {
-//   inputSchema: eventBaseSchema,
-// }

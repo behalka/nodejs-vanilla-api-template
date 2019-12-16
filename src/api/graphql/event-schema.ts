@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
-import { createEvent, listEvents, findEvent } from '../../operations/event/index'
 import { objectType, extendType, arg, intArg, inputObjectType } from 'nexus'
+import { createEvent, listEvents, findEvent } from '../../operations/event'
 
 const Event = objectType({
   name: 'Event',

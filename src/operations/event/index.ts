@@ -5,12 +5,8 @@ import { makeListEvents } from './list'
 
 const { compose } = require('ramda')
 const base = require('../base')
-// const eventEntity = require('../../entities/event')
 const { inputIdSchema } = require('../../entities/shared')
 const { eventRepo } = require('../../data-access/repos/index')
-// const { makeCreateEvent } = require('./create')
-// const { makeFindEvent } = require('./find')
-// const { makeListEvents } = require('./list')
 
 // this type is correct
 type CompiledCreateEventFn = ReturnType<typeof makeCreateEvent>
@@ -33,9 +29,3 @@ export const listEvents: ReturnType<typeof makeListEvents> = compose(
   base({ name: 'ListEvents' }),
   makeListEvents,
 )({ findAll: eventRepo.findAll })
-
-// module.exports = {
-//   createEvent,
-//   findEvent,
-//   listEvents,
-// }
