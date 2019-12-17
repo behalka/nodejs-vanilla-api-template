@@ -1,7 +1,4 @@
-const Ajv = require('ajv')
-
-const ajv = new Ajv()
+import * as Ajv from 'ajv'
 
 // there will be imported schemas etc as in RichUncles codebase (e.g { type: email })
-
-module.exports = ajv
+export const ajv = new Ajv()

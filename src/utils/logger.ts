@@ -1,4 +1,4 @@
-const pino = require('pino')
+import * as pino from 'pino'
 
 const getLogLevel = () => {
   if (process.env.NODE_ENV === 'test') {
@@ -7,8 +7,7 @@ const getLogLevel = () => {
   return 'debug'
 }
 
-// todo: setup and load config
-const logger = pino({
+export const log = pino({
   name: 'pino-logger-name',
   prettyPrint: true,
   level: getLogLevel(),
@@ -18,5 +17,3 @@ const logger = pino({
     res: pino.stdSerializers.res,
   },
 })
-
-module.exports = logger
