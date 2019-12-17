@@ -7,6 +7,6 @@
     "allowJs": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "./src/ts-experiments"],
   "include": ["./src/**/*"]
 }
