@@ -1,26 +1,16 @@
-import { EventType } from '../../entities/event'
 import { InputId } from '../../entities/shared'
+import { EventRepoType } from '../../data-access/repos'
 
-// this is a type for a repo fn
-// each injected service/repo function would need this
-// functions can be typed in a repo BUT they would need to be imported here
 // perhaps it's OK to just import types
-// our functions are still "pure" just their types are not
-// the type is internal (id: number vs. InputId type)
-type FindByIdFn = (id: number) => Promise<EventType>
 
-// OR we can try to resolve "imports" via ambient types
+type Deps = {
+  findById: EventRepoType['findById']
+}
 
-export const makeFindEvent = ({ findById }: { findById: FindByIdFn }) => async (
-  input: InputId,
-) => {
+export const makeFindEvent = ({ findById }: Deps) => async (input: InputId) => {
   const event = await findById(input.id)
   if (!event) {
     throw new Error('event not found')
   }
   return event
 }
-
-// module.exports = {
-//   makeFindEvent,
-// }

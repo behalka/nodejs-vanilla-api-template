@@ -1,31 +1,32 @@
-import { eventBaseSchema } from '../../entities/event'
+import { EventType, EventInput } from '../../entities/event'
+import { inputIdSchema, InputId } from '../../entities/shared'
+import { eventRepo } from '../../data-access/repos'
+import { makeOperation } from '../base'
 import { makeCreateEvent } from './create'
 import { makeFindEvent } from './find'
 import { makeListEvents } from './list'
 
-const { compose } = require('ramda')
-const base = require('../base')
-const { inputIdSchema } = require('../../entities/shared')
-const { eventRepo } = require('../../data-access/repos/index')
+// different output types allow for a difference between
+// whatever QueryBuilders input and entity type shapes
+const findEvent = makeOperation<InputId, EventType>({
+  name: 'MyFindOperation',
+  schema: inputIdSchema,
+  execute: makeFindEvent,
+  dependencies: {
+    findById: eventRepo.findById,
+  },
+})
 
-// this type is correct
-type CompiledCreateEventFn = ReturnType<typeof makeCreateEvent>
+const listEvents = makeOperation<null, EventType[]>({
+  name: 'MyListOperation',
+  execute: makeListEvents,
+  dependencies: {},
+})
 
-// findUser is a compiled operation that can be used from API, worker, CLI...
-export const createEvent: CompiledCreateEventFn = compose(
-  // operation static metadata, e.g validation schema, execution context..
-  base({ name: 'myFancyCreateEvent', schema: eventBaseSchema }),
-  // operation "make"
-  makeCreateEvent,
-)({ create: eventRepo.create })
+const createEvent = makeOperation<EventInput, EventType>({
+  name: 'MyListOperation',
+  execute: makeCreateEvent,
+  dependencies: { create: eventRepo.create },
+})
 
-// we don't need to create a type
-export const findEvent: ReturnType<typeof makeFindEvent> = compose(
-  base({ name: 'FindEvent', schema: inputIdSchema }),
-  makeFindEvent,
-)({ findById: eventRepo.findById })
-
-export const listEvents: ReturnType<typeof makeListEvents> = compose(
-  base({ name: 'ListEvents' }),
-  makeListEvents,
-)({ findAll: eventRepo.findAll })
+export { findEvent, listEvents, createEvent }
