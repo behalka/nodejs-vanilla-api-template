@@ -17,6 +17,10 @@ class B extends A {
   age = 10
 }
 
+type AType = typeof A
+let foo: AType
+const bar = new foo().age
+
 // this means that value of TC type can be called with "new" and returns M
 // M type can be restricted (returns a type)
 // TC type is not "modelled" again
