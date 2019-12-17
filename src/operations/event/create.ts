@@ -20,5 +20,5 @@ export const makeCreateEvent = ({ create }: Deps) => async (input: EventInput) =
 }
 
 // this will be in unit tests
-const fakeCreate = () => Promise.resolve({ id: 1, name: 'foo' })
-const mockCreateEvent = makeCreateEvent<MockDeps>({ create: fakeCreate })
+// const fakeCreate = () => Promise.resolve({ id: 1, name: 'foo' })
+// const mockCreateEvent = makeCreateEvent<MockDeps>({ create: fakeCreate })

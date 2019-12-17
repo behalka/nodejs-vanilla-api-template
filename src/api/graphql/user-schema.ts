@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
-const { objectType, queryField } = require('nexus')
-const { listUsers } = require('../../operations/user')
+import { objectType, queryField } from 'nexus'
+import { listUsers } from '../../operations/user'
 
 const User = objectType({
   name: 'User',
@@ -19,10 +19,7 @@ const User = objectType({
 const userQueries = queryField('users', {
   type: 'User',
   list: true,
-  resolve: () => listUsers({ isAdmin: false }),
+  resolve: () => listUsers({ isAdmin: true }),
 })
 
-module.exports = {
-  User,
-  userQueries,
-}
+export { User, userQueries }

@@ -1,5 +1,11 @@
 // THIS FILE SHOULD HAVE NO IMPORTS ..
-import { JSONSchema } from 'objection'
+import { JsonSchema } from 'objection'
+
+export type UserType = {
+  email: string
+  firstName?: string
+  lastName?: string
+}
 
 /**
  * The userRole options ask for 1) injection 2) there we could actually break the rule and import it
@@ -16,7 +22,7 @@ export const buildUser = (input, userRole) => {
 // typescript type?
 // business rules for the entity - e.g. validate the email
 // input validation
-export const userInputSchema: JSONSchema = {
+export const userInputSchema: JsonSchema = {
   type: 'object',
   required: ['email'],
   properties: {
