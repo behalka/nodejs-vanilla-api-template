@@ -17,7 +17,7 @@ const findEvent = makeOperation<InputId, EventType>({
   },
 })
 
-const listEvents = makeOperation<null, EventType[]>({
+const listEvents = makeOperation<{}, EventType[]>({
   name: 'MyListOperation',
   execute: makeListEvents,
   dependencies: {},

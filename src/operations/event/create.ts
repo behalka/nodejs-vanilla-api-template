@@ -7,6 +7,7 @@ type Deps = {
 }
 
 // this would happen in tests -> how to pass it in?
+// we can compile it the same way we do in index with different stuff
 type MockDeps = {
   create: (...args: any[]) => Promise<EventType>
 }
