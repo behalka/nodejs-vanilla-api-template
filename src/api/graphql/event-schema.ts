@@ -39,7 +39,7 @@ const eventQueries = extendType({
     })
     t.list.field('events', {
       type: Event,
-      resolve: () => listEvents(),
+      resolve: () => listEvents({}),
     })
   },
 })
@@ -63,8 +63,4 @@ const eventMutations = extendType({
   },
 })
 
-module.exports = {
-  Event,
-  eventQueries,
-  eventMutations,
-}
+export { Event, eventQueries, eventMutations }
