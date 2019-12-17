@@ -1,6 +1,7 @@
-const { Model, knexSnakeCaseMappers } = require('objection')
-const Knex = require('knex')
-const handlers = require('./handlers')
+import { Model, knexSnakeCaseMappers } from 'objection'
+import * as Knex from 'knex'
+
+import handlers = require('./handlers')
 
 // global database setup
 
@@ -21,7 +22,7 @@ Model.knex(knex)
 const startConnection = handlers.makeStartConnection(knex)
 const stopConnection = handlers.makeStopConnection(knex)
 
-module.exports = {
+export const database = {
   startConnection,
   stopConnection,
 }

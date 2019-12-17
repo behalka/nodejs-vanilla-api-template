@@ -1,10 +1,8 @@
 /* eslint-disable id-length */
+import * as path from 'path'
 import { makeSchema, interfaceType } from 'nexus'
-
-const path = require('path')
-// const { makeSchema, interfaceType } = require('nexus')
-const userSchema = require('./user-schema')
-const eventSchema = require('./event-schema')
+import * as userSchema from './user-schema'
+import * as eventSchema from './event-schema'
 
 /**
  * GraphQL schema definition
@@ -24,11 +22,9 @@ const Node = interfaceType({
   },
 })
 
-const schema = makeSchema({
+export const schema = makeSchema({
   types: [Node, ...Object.values(userSchema), ...Object.values(eventSchema)],
   outputs: {
     schema: path.join(__dirname, 'schema.gql'),
   },
 })
-
-module.exports = { schema }

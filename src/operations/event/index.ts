@@ -20,7 +20,9 @@ const findEvent = makeOperation<InputId, EventType>({
 const listEvents = makeOperation<{}, EventType[]>({
   name: 'MyListOperation',
   execute: makeListEvents,
-  dependencies: {},
+  dependencies: {
+    findAll: eventRepo.findAll,
+  },
 })
 
 const createEvent = makeOperation<EventInput, EventType>({

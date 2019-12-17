@@ -1,6 +1,6 @@
-const api = require('./api/index')
-const database = require('./data-access/index')
-const log = require('./utils/logger')
+import { api } from './api'
+import { database } from './data-access'
+import { log } from './utils/logger'
 
 const removeProcessListeners = () => {
   process.removeAllListeners('SIGINT')

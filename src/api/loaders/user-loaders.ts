@@ -1,8 +1,8 @@
 // this is actually a "simple" operation. We could consider moving it there
 // and following the injection pattern -> repos should be injected
-const Dataloader = require('dataloader')
+import * as Dataloader from 'dataloader'
 
-const makeEventOwnersLoader = ({ findAllByIds, transform }) =>
+export const makeEventOwnersLoader = ({ findAllByIds, transform }) =>
   new Dataloader(
     async ownerIds => {
       const owners = await findAllByIds(ownerIds)
@@ -10,7 +10,3 @@ const makeEventOwnersLoader = ({ findAllByIds, transform }) =>
     },
     { cache: true },
   )
-
-module.exports = {
-  makeEventOwnersLoader,
-}

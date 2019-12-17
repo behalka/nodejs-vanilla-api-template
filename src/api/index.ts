@@ -1,10 +1,10 @@
-const app = require('./app')
+import { app } from './app'
 const handlers = require('./handlers')
 
 const startApi = handlers.start(app.koa, app.setServer)
 const stopApi = handlers.stop(app.getServer)
 
-module.exports = {
+export const api = {
   startApi,
   stopApi,
 }

@@ -1,4 +1,4 @@
-const log = require('../utils/logger')
+const { log } = require('../utils/logger')
 
 const makeStartConnection = knex => async () => {
   await knex.raw('SELECT 1+1')

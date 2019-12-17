@@ -1,4 +1,4 @@
-const log = require('../../utils/logger')
+import { log } from '../../utils/logger'
 
 const formatUnknownError = err => {
   const payload = {
@@ -29,7 +29,7 @@ const handleUnknownError = (err, ctx) => {
   ctx.body = formatUnknownError(err)
 }
 
-const makeErrorHandlerMdw = () => async (ctx, next) => {
+export const makeErrorHandlerMdw = () => async (ctx, next) => {
   try {
     // eslint-disable-next-line callback-return
     await next()
@@ -39,8 +39,4 @@ const makeErrorHandlerMdw = () => async (ctx, next) => {
     // }
     return handleUnknownError(err, ctx)
   }
-}
-
-module.exports = {
-  makeErrorHandlerMdw,
 }

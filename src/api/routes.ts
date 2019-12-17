@@ -1,5 +1,5 @@
-const Router = require('koa-router')
-const { findUser, listUsers } = require('../operations/user')
+import * as Router from 'koa-router'
+import { findUser, listUsers } from '../operations/user'
 
 const router = new Router()
 
@@ -26,4 +26,4 @@ router.get('/', ctx => {
   ctx.body = { hello: true }
 })
 
-module.exports = { router }
+export { router }

@@ -1,6 +1,6 @@
-const { indexBy, prop, groupBy } = require('ramda')
-const { userRepo } = require('../../data-access/repos')
-const { makeEventOwnersLoader } = require('./user-loaders')
+import { indexBy, prop, groupBy } from 'ramda'
+import { userRepo } from '../../data-access/repos'
+import { makeEventOwnersLoader } from './user-loaders'
 
 /**
  * Transform a list of DB results for Dataloader -> respects order.
@@ -34,7 +34,7 @@ const transformOneToMany = (ids, entities, propName) => {
   return ids.map(id => (indexed[id] ? indexed[id] : []))
 }
 
-const initLoaders = () => ({
+export const initLoaders = () => ({
   user: {
     eventOwnersLoader: makeEventOwnersLoader({
       findAllByIds: userRepo.findAllByIds,
@@ -42,7 +42,3 @@ const initLoaders = () => ({
     }),
   },
 })
-
-module.exports = {
-  initLoaders,
-}

@@ -1,10 +1,10 @@
-const Koa = require('koa')
-const { ApolloServer } = require('apollo-server-koa')
-const log = require('../utils/logger')
-const { router } = require('./routes')
-const { schema } = require('./graphql')
-const { initLoaders } = require('./loaders')
-const { makeErrorHandlerMdw } = require('./middleware/error-handler')
+import * as Koa from 'koa'
+import { ApolloServer } from 'apollo-server-koa'
+import { log } from '../utils/logger'
+import { schema } from './graphql'
+import { router } from './routes'
+import { makeErrorHandlerMdw } from './middleware/error-handler'
+import { initLoaders } from './loaders'
 
 // GraphQL server plug-in
 const graphQlServer = new ApolloServer({
@@ -28,15 +28,14 @@ koa.use(makeErrorHandlerMdw())
 koa.use(router.routes()).use(router.allowedMethods())
 // plug-in apollo server
 graphQlServer.applyMiddleware({ app: koa })
+
 // http server is a "private" variable here
 let server
 
-const app = {
+export const app = {
   koa,
   setServer: createdServer => {
     server = createdServer
   },
   getServer: () => server,
 }
-
-module.exports = app
