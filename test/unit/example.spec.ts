@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { QueryBuilderYieldingOneOrNone } from 'objection'
+import { QueryBuilder } from 'objection'
 import { makeFindUser } from '../../src/operations/user/find'
 import { makeOperation } from '../../src/operations/base'
 import { User } from '../../src/data-access/models'
@@ -19,8 +19,7 @@ const fakeUsers = [
 ]
 const fakeRepo = {
   getAll: () => fakeUsers,
-  findOne: (id: number) =>
-    (Promise.resolve(fakeUsers[0]) as unknown) as QueryBuilderYieldingOneOrNone<User>,
+  findOne: (id: number) => (Promise.resolve(fakeUsers[0]) as unknown) as QueryBuilder<User, User>,
   findOneEmpty: (id: number) => Promise.resolve(null),
   findOneSimple: () => Promise.resolve(fakeUsers[1]),
 }

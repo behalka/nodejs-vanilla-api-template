@@ -1,4 +1,4 @@
-import { JsonSchema } from 'objection'
+import { JSONSchema } from 'objection'
 import { log } from '../utils/logger'
 import { ajv } from '../utils/validator'
 
@@ -6,7 +6,7 @@ import { ajv } from '../utils/validator'
 type CompiledOperation<IN, OUT> = (input: IN) => Promise<OUT>
 type OperationInput<IN = any, OUT = any> = {
   name: string
-  schema?: JsonSchema
+  schema?: JSONSchema
   execute: (...args: any[]) => CompiledOperation<IN, OUT>
   // figure out type here
   // should be the first argument of execute

@@ -1,8 +1,10 @@
+import { JSONSchema } from 'objection'
+
 export type InputId = {
   id: number
 }
 
-export const inputIdSchema = {
+export const inputIdSchema: JSONSchema = {
   type: 'object',
   required: ['id'],
   properties: {

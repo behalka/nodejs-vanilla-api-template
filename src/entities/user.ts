@@ -1,5 +1,5 @@
 // THIS FILE SHOULD HAVE NO IMPORTS ..
-import { JsonSchema } from 'objection'
+import { JSONSchema } from 'objection'
 
 export type UserType = {
   email: string
@@ -22,7 +22,7 @@ export const buildUser = (input, userRole) => {
 // typescript type?
 // business rules for the entity - e.g. validate the email
 // input validation
-export const userInputSchema: JsonSchema = {
+export const userInputSchema: JSONSchema = {
   type: 'object',
   required: ['email'],
   properties: {

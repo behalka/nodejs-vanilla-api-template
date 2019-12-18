@@ -1,4 +1,4 @@
-import { JsonSchema } from 'objection'
+import { JSONSchema } from 'objection'
 import { userInputSchema } from '../../entities/user'
 import { BaseModel } from './base'
 
@@ -14,7 +14,7 @@ export class User extends BaseModel {
     return 'user'
   }
 
-  static get jsonSchema(): JsonSchema {
+  static get jsonSchema(): JSONSchema {
     return userInputSchema
   }
 }
