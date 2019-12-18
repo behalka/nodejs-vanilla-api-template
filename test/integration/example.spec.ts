@@ -1,6 +1,6 @@
-const { expect } = require('chai')
-const request = require('supertest')
-const app = require('../../src/api/app')
+import { expect } from 'chai'
+import * as request from 'supertest'
+import { app } from '../../src/api/app'
 
 describe('test the tests!', () => {
   it('should pass', () => {
