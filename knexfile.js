@@ -1,14 +1,26 @@
+const dotenv = require('dotenv')
+
+dotenv.config()
+
 // Update with your config settings.
 const localSetting = {
   client: 'postgresql',
   connection: {
-    database: 'vanilla-template-db',
-    user: 'postgres',
-    password: 'postgres',
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
   },
   pool: {
     min: 1,
     max: 2,
+  },
+}
+
+const testSetting = {
+  ...localSetting,
+  connection: {
+    ...localSetting.connection,
+    database: process.env.DB_DATABASE_TEST,
   },
 }
 
@@ -20,6 +32,10 @@ module.exports = {
 
   development: {
     ...localSetting,
+  },
+
+  test: {
+    ...testSetting,
   },
 
   staging: {

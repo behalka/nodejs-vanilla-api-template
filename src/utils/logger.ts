@@ -1,16 +1,10 @@
 import * as pino from 'pino'
-
-const getLogLevel = () => {
-  if (process.env.NODE_ENV === 'test') {
-    return 'error'
-  }
-  return 'debug'
-}
+import { config } from '../config'
 
 export const log = pino({
   name: 'pino-logger-name',
   prettyPrint: true,
-  level: getLogLevel(),
+  level: config.logging.logLevel,
   serializers: {
     err: pino.stdSerializers.err,
     req: pino.stdSerializers.req,

@@ -24,10 +24,7 @@ compile: install
 test: install
 	NODE_ENV=test LOG_LEVEL=error mocha -r ts-node/register/transpile-only $(testFlags) "./test/**/*.spec.ts"
 
-run:
-	node ./src/index.js
-
-run-compiled: compile
+run: compile
 	node ./dist/src/index.js
 
 watch: install
@@ -36,14 +33,17 @@ watch: install
 # coverage: install
 # 	NODE_ENV=test nyc mocha $(testFlags) "./test/**/*.spec.js"
 
-# migrate-test: install
-# 	ts-node $(bin)typeorm --connection test migration:run
-
 migrate: install
 	$(bin)knex migrate:latest --debug
 
 migrate-down: install
 	$(bin)knex migrate:rollback
+
+migrate-test: install
+	$(bin)knex migrate:latest --env test
+
+migrate-down-test: install
+	$(bin)knex migrate:rollback --env test
 
 seed: install
 	$(bin)knex seed:run
