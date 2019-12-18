@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "allowJs": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "./src/ts-experiments"],
+  "include": ["./src/**/*", "./test/**/*"]
+}

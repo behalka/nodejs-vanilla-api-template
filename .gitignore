@@ -1,4 +1,5 @@
-# dist/
+dist/
+src/ts-experiments/
 
 ### macOS ###
 *.DS_Store
