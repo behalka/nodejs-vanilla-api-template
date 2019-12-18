@@ -22,13 +22,13 @@ compile: install
 	tsc --pretty --project ./tsconfig.json
 
 test: install
-	NODE_ENV=test LOG_LEVEL=error mocha $(testFlags) "./test/**/*.spec.js"
+	NODE_ENV=test LOG_LEVEL=error mocha -r ts-node/register/transpile-only $(testFlags) "./test/**/*.spec.ts"
 
 run:
 	node ./src/index.js
 
 run-compiled: compile
-	node ./dist/index.js
+	node ./dist/src/index.js
 
 watch: install
 	$(bin)nodemon --watch src --ext js,gql --exec make run
@@ -51,6 +51,7 @@ seed: install
 clean:
 	rm -rf ./.nyc_output
 	rm -rf ./coverage
+	rm -rf ./dist
 
 # persist: install
 # 	persistgraphql ./queries ./src/persisted-queries.json --add_typename

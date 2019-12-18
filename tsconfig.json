@@ -8,5 +8,5 @@
     "skipLibCheck": true
   },
   "exclude": ["node_modules", "./src/ts-experiments"],
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./test/**/*"]
 }
