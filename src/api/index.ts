@@ -1,5 +1,5 @@
 import { app } from './app'
-const handlers = require('./handlers')
+import { handlers } from './handlers'
 
 const startApi = handlers.start(app.koa, app.setServer)
 const stopApi = handlers.stop(app.getServer)

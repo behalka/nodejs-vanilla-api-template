@@ -1,7 +1,6 @@
 import { Model, knexSnakeCaseMappers } from 'objection'
 import * as Knex from 'knex'
-
-import handlers = require('./handlers')
+import { handlers } from './handlers'
 
 // global database setup
 

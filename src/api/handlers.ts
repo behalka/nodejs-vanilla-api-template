@@ -1,4 +1,4 @@
-const { log } = require('../utils/logger')
+import { log } from '../utils/logger'
 
 const stop = getServerHandler => async () => {
   const server = getServerHandler()
@@ -17,7 +17,4 @@ const start = (koaApp, setServerHandler) => async () => {
   log.info('Server: started')
 }
 
-module.exports = {
-  start,
-  stop,
-}
+export const handlers = { start, stop }

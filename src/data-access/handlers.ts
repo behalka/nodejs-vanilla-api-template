@@ -1,4 +1,4 @@
-const { log } = require('../utils/logger')
+import { log } from '../utils/logger'
 
 const makeStartConnection = knex => async () => {
   await knex.raw('SELECT 1+1')
@@ -14,7 +14,7 @@ const makeStopConnection = knex => async () => {
   return true
 }
 
-module.exports = {
+export const handlers = {
   makeStartConnection,
   makeStopConnection,
 }
