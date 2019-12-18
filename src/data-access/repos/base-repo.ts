@@ -1,4 +1,4 @@
-import { Model, ModelClass, Pojo } from 'objection'
+import { Model, ModelClass } from 'objection'
 
 type ModelClassHack<T extends Model> = ModelClass<T>
 // this is for Objection v2

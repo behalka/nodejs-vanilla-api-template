@@ -54,7 +54,7 @@ const eventMutations = extendType({
       },
       // args can be "any" we know what's in the operation thanks to type there and validation
       // resolve: async (root, args) => {
-      resolve: async (root, args: { input: { name: string } }) => {
+      resolve: async (root, args: { input: { name: string; description: string } }) => {
         // createEvent input is inferred and checked correctly
         const event = await createEvent(args.input)
         return event

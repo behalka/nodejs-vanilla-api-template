@@ -1,5 +1,6 @@
 export type EventInput = {
   name: string
+  description: string
 }
 
 // todo: and more stuff

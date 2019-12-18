@@ -28,7 +28,7 @@ export const makeOperation = <IN, OUT>(
     if (!valid) {
       // { validationErrors: validationFunc.errors, operation: name },
       log.warn('Operation input invalid')
-      throw new Error('there were validation errors')
+      throw new Error('validation errors')
     }
 
     // todo: sanitize input
