@@ -20,6 +20,6 @@ module.exports = {
     'import/exports-last': 0,
     'max-classes-per-file': 0,
     // todo: consider using this -> it doesn't look like it's needed everywhere
-    // '@typescript-eslint/explicit-function-return-type': 0
+    '@typescript-eslint/explicit-function-return-type': 0,
   },
 }

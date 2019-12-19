@@ -1,21 +1,41 @@
+import { config, ENUMS } from '../../config'
 import { log } from '../../utils/logger'
+import * as errors from '../../errors'
 
-const formatUnknownError = err => {
-  const payload = {
+const formatApiError = (err: errors.ApiError) => {
+  const payload: Record<string, any> = {
+    message: err.message,
+    name: err.name,
+    extensions: {
+      code: errors.ErrorCodes.GENERIC,
+      ...err.extensions,
+    },
+    // code: err.extensions.code || errors.ErrorCodes.GENERIC,
+  }
+  if (config.env !== ENUMS.ENVIRONMENT.PROD) {
+    payload.stack = err.stack
+  }
+}
+
+const formatUnknownError = (err: Error) => {
+  const payload: Record<string, any> = {
     message: err.message,
     name: err.name,
     code: 'GENERIC',
   }
-  // if (config.env !== ENVIRONMENT.PROD) {
-  //   payload.stack = err.stack
-  // }
-  // todo: return correlation id in prod
+  if (config.env !== ENUMS.ENVIRONMENT.PROD) {
+    payload.stack = err.stack
+  }
   return payload
 }
 
-// todo: provide knownErrorHandler
+const handleKnownError = (err: errors.ApiError, ctx: Api.IKoaCtx): void => {
+  log.warn({ err, requestId: ctx.requestId }, 'Known error handled')
+  ctx.status = err.extensions.statusCode || 500
+  ctx.body = formatApiError(err)
+}
 
-const handleUnknownError = (err, ctx) => {
+const handleUnknownError = (err: Error, ctx: Api.IKoaCtx) => {
   log.error(
     {
       err,
@@ -34,9 +54,9 @@ export const makeErrorHandlerMdw = () => async (ctx, next) => {
     // eslint-disable-next-line callback-return
     await next()
   } catch (err) {
-    // if (err instanceof ApiError) {
-    //   return handleKnownError(err, ctx)
-    // }
+    if (err instanceof errors.ApiError) {
+      return handleKnownError(err, ctx)
+    }
     return handleUnknownError(err, ctx)
   }
 }

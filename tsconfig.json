@@ -3,6 +3,7 @@
     "module": "commonjs",
     "target": "esnext",
     "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "./src/api/@types"],
     "sourceMap": true,
     "allowJs": true,
     "skipLibCheck": true
