@@ -1,15 +1,38 @@
 # STRV vanilla API template
 
-## What's the goal here
+## What's the goal
 
-- to try to explore the options of pure Javascript
+- to try to explore the options of not-so-OOP Typescript (pure JS version also available)
 - to try to leverage simple composition patterns over OOP
 - to build a minimal API skeleton with as little magic as possible
   - with GraphQL server
   - without decorators
   - with the most transparent ORM I know of - Objection.js
 
-## TODO - functionality/tests
+## Run it
+
+- `$ docker-compose up -d`
+- database: make sure to create `vanilla-template-db` and `vanilla-template-db-test` databases
+- create your `.env` file following `.env.example`
+- and then:
+
+```bash
+  $ make migrate
+  # runs the initial migration
+  $ make seed
+  # optional :)
+  $ make run
+  # starts the API on default port
+```
+
+```bash
+  $ make migrate-test
+  # prepares DB for integration tests
+  $ make test
+  # hopefully runs the tests suite 🤖
+```
+
+## Functionality/examples
 
 - simple 3-entities example (User, Event, Tag)
 - fancy tags search to test ORM capabilities
@@ -18,25 +41,9 @@
 - efficient DB/Repository mocks -> paralel tests
 - Dataloader
 - Admin/User operation setup
-- Validation (probably in operations)
-- Authorization/user roles - NEXT
+- Validation in operations
+- Authorization/user roles (todo)
 - mocks: maybe mocked repos must have different outputs on first/second call
   - might work to add sinon mocks there (can program it to return different things on each call)
 - errors, error handlers
-
-## Feedback from Michal
-
-- Injection example -> different impl. of findUser for admin and user operation
-  - shared operation code
-  - findUser repo call will implement some implicit restrictions
-- Inject different validation schemas
-
-- Typescript interfaces -> JUST like contracts between layers
-
-  - try to include a reasonable amount of TS, stick with JS files maybe
-  - without TS, there will be basically no intellisense in business logic files
-
-- Prepare some basic methods for a repo and build them for every model-based repo
-  - e.g basic "update" method
-  - copy those methods to each "built" repo
-  - that would require DI
+- seed files in tests/helpers (todo)
